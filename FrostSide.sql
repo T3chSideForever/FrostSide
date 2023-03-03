@@ -16,10 +16,15 @@ CREATE TABLE fornecedor(
 
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY auto_increment,
-    sttSensor TINYINT constraint chkSensor check (sttSensor IN(0,1)),
-    sitSensor VARCHAR(50) constraint ckSensor check (sitSensor IN('Quebrado', 'Funcionando')),
+    sitSensor VARCHAR(50) constraint ckSensor check (sitSensor IN('Quebrado', 'Funcionando'))
+);
+
+CREATE TABLE registro(
+	idRegistro INT primary key auto_increment,
+    idSensor INT,
     registro FLOAT NOT NULL,
-    dtRegistro DATETIME DEFAULT current_timestamp    
+    dtRegistro DATETIME DEFAULT current_timestamp,    
+    FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
 );
 
 DESC sensor;
