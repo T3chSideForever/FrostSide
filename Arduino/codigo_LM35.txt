@@ -1,0 +1,17 @@
+const int lm35 = A0;
+float t;
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+
+}
+
+void loop() {
+  int leitura = analogRead(lm35);
+  t = (5.0 / 1023) * leitura * 100;
+  Serial.println(leitura);
+  Serial.print("Temperatura: ");
+  Serial.print(t);
+  Serial.println("°C");
+  delay(5000);
+}
