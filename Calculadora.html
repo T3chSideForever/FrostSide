@@ -1,0 +1,40 @@
+<!-- Roteador Wireless 300Mbps Tp-link TL-WR840N = 100;
+    Mantenção sistema: 175; 
+    Mantenção sensores: 150;
+    plano 300mg = 120;
+    sensor = 31.77;
+    preco sistema = 1100. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto da Calculadora Financeira</title>
+</head>
+
+<body>
+    <h1>Faça um orçamento para contratar nossos serviços!</h1>
+    <br> Informe a quantidade de veículos da sua transportadora: <input id="input_veiculos">
+    <br><br>
+    <button onclick="calcularOrcamento()">Calcular Orçamento</button>
+    <br><br>
+    <div id="div_preco"></div>
+</body>
+
+</html>
+
+
+
+<script>
+    function calcularOrcamento() {
+        var veiculos = Number(input_veiculos.value);
+        var custoImplementação = (veiculos * 31.77) + (veiculos * 100) + 1220;
+        var cutoMensal = 175 + (veiculos * 150) + 120;
+        div_preco.innerHTML = `O custo de implementação do sistema será: R$${custoImplementação} e você gastará R$${cutoMensal} por mês em mantenção.`
+
+    }
+</script>
