@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento</title>
+</head>
+<body>
+    <div id="Previsão">
+        <h1>Analisar a quantidade de lotes termolábeis com risco de desperdício:</h1>
+        Previsão da quantidade de lotes termolábeis transportados no próximo mês: <input type="text" id="input_qtdPrevisao"><br>
+        Custo médio de um lote: <input type="text" id="input_valorLote">
+        <button onclick="analisar()">Analisar</button>
+
+       <p id="resultado_Previsao"></p>
+    </div>
+
+    <div id="ValorSolucao">
+        <h1>Valor da solução FrostSide de acordo com sua demanda:</h1>
+        Quantidade de veículos: <input type="text" id="input_qtdVeiculos">
+        <button onclick="calcular()">Calcular</button>
+
+        <p id="resultado_Instalação"></p>
+        <p id="resultado_Mensal"></p>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    function analisar() {
+        var previsao = Number(input_qtdPrevisao.value);
+        var previsaoLotesAvariados = previsao * 0.25;
+        var valorLote = Number(input_valorLote.value);
+        var prejuizo = valorLote * previsaoLotesAvariados;
+        resultado_Previsao.innerHTML = `<p>${previsaoLotesAvariados} lotes podem ser perdidos, causando um prejuízo financeiro de: <b style=color:red>R$ ${prejuizo}</b></p>`;
+        resultado_Previsao.innerHTML += `<p>Seguindo essa mesma quantidade de transportes, em 3 meses o prejuízo pode chegar em  <b style=color:red>R$ ${prejuizo*3}</b></p>`;
+    }
+    function calcular() {
+        var veiculos  = Number(input_qtdVeiculos.value);
+        var arduino = 92.00;
+        var sensor = 35.30;
+        var protoboard = 4.50;
+        var kitIOT = arduino + sensor + protoboard;
+        var valorInstalação = kitIOT * veiculos;
+        resultado_Instalação.innerHTML = `<p>Instalação dos sensores nos veículos: R$${valorInstalação}</p>`; 
+        resultado_Mensal.innerHTML = `<p>Custo mensal de uso da solução: R$ 1400</p>`; 
+
+    }
+</script>
