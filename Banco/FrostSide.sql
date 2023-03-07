@@ -1,3 +1,4 @@
+use sprint1;
 CREATE DATABASE frostSide;
 USE frostSide;
 
@@ -9,26 +10,23 @@ CREATE TABLE usuario(
 
 INSERT INTO usuario (login, senha)
 	VALUES 
-		('empresa1', '123456'),
-		('empresa2', '654321'),
-		('empresa3', '246810'),
-		('empresa3', '135791');
+		('empresa1', '123456');
 SELECT * FROM usuario;
 
-CREATE TABLE fornecedor(
-	idFornecedor INT PRIMARY KEY auto_increment,
+CREATE TABLE transportadora(
+	idTransportadora INT PRIMARY KEY auto_increment,
     nome VARCHAR(50),
-	cnpj CHAR(18)
+	cnpj CHAR(18),
+    IE CHAR(9)
 );
 
-INSERT INTO fornecedor(nome, cnpj)
+INSERT INTO transportadora(nome, cnpj)
 	VALUES	
-		('Bayer','18459628000115'),
-		('Medley','13094578000872'),
-		('Pfizer','46070868003699'),
-		('Neo Química','05161069000110');
+		('Log10','18459628000115'),
+		('FarmaTransporte','13094578000872'),
+		('SpeedTransfer','46070868003699');
         
-SELECT *  FROM fornecedor;
+SELECT *  FROM transportadora;
 
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY auto_increment,
@@ -62,3 +60,28 @@ SELECT * FROM registro;
 DESC sensor;
 DESC fornecedor;
 DESC usuario;
+
+SELECT * FROM usuario;
+
+INSERT INTO usuario (login, senha) VALUES
+('empresa5', '489012');
+
+select * from usuario;
+
+select * from fornecedor;
+
+insert into fornecedor (nome, cnpj) values
+('Johnson', '90547821436517');
+
+update fornecedor set nome = 'johnson johnson' where idFornecedor = 5;
+
+select * from usuario where login like '%_';
+
+drop database frostSide;
+
+CREATE TABLE destino (
+idDestino int primary key auto_increment,
+nomeDestino VARCHAR(100)
+);
+/*dtEntrega DATETIME*/
+
