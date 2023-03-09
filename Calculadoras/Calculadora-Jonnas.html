@@ -1,40 +1,40 @@
-<!-- Roteador Wireless 300Mbps Tp-link TL-WR840N = 100;
-    Mantenção sistema: 175; 
-    Mantenção sensores: 150;
-    plano 300mg = 120;
-    sensor = 31.77;
-    preco sistema = 1100. 
--->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto da Calculadora Financeira</title>
+    <title>Calculadora</title>
 </head>
-
 <body>
-    <h1>Faça um orçamento para contratar nossos serviços!</h1>
-    <br> Informe a quantidade de veículos da sua transportadora: <input id="input_veiculos">
-    <br><br>
-    <button onclick="calcularOrcamento()">Calcular Orçamento</button>
-    <br><br>
-    <div id="div_preco"></div>
+    Informe o número de lotes: <input id="input_lotes"><br>
+    Informe o preço médio por lote: <input id="input_preco_lote"><br>
+    Informe a % de perda: <input id="input_perda"><br><br>
+    <button onclick="calcularPerda()">Calcular a perda</button><br><br>
+    <div id="div_resultado"></div>
 </body>
-
 </html>
 
-
-
 <script>
-    function calcularOrcamento() {
-        var veiculos = Number(input_veiculos.value);
-        var custoImplementação = (veiculos * 31.77) + (veiculos * 100) + 1220;
-        var cutoMensal = 175 + (veiculos * 150) + 120;
-        div_preco.innerHTML = `O custo de implementação do sistema será: R$${custoImplementação} e você gastará R$${cutoMensal} por mês em mantenção.`
+    function calcularPerda(){
+        var lotes = Number(input_lotes.value);
+        var valor = Number(input_preco_lote.value);
+        var porcentagemPerdas = Number(input_perda.value);
+        var precoLotes = lotes * valor;
+        var precoPerda = precoLotes * (porcentagemPerdas / 100);
+        var economia = precoPerda - (precoPerda * (45 / 100));
+        var lucro = precoPerda - economia
+        div_resultado.innerHTML = `
 
+            Transportando ${lotes} lotes pelo valor de R$${valor} cada, você gastou
+            R$${precoLotes} e, com ${porcentagemPerdas}% de perdas, você teve um prejuízo
+            de R$${precoPerda}, com a nossa ferramenta, você economizaria R$${economia},
+            fornecendo um lucro de R$${lucro} à sua empresa
+
+            <br>
+            Com a porcentagem de perdas em 
+
+
+        `;
     }
 </script>
