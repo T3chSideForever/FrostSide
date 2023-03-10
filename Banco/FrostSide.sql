@@ -57,7 +57,7 @@ INSERT INTO registro(idSensor, registro)
 
 SELECT * FROM registro;
 DESC sensor;
-DESC fornecedor;
+DESC transportadora;
 DESC usuario;
 
 SELECT * FROM usuario;
