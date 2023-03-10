@@ -78,5 +78,19 @@ INSERT INTO destino (idDestino, nomeDestino) VALUES
 (null, 'Hospital Estadual Sumaré Dr. Leandro Franceschini'),
 (null, 'Hospital Geral Dr. Waldemar Alcantara');
 
+CREATE TABLE pedido (
+idPedido INT PRIMARY KEY auto_increment,
+qtdLotes int,
+tempMax DECIMAL(3,1),
+tempMin DECIMAL(3,1)
+);
 
+desc pedido;
 /*dtEntrega DATETIME*/
+
+CREATE TABLE lote (
+idLote int primary key auto_increment,
+nomeRemedio varchar(80)
+);
+
+SHOW TABLES FROM frostside;
