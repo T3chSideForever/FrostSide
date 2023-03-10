@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    Informe o número de lotes: <input id="input_lotes"><br>
+    Informe o preço médio por lote: <input id="input_preco_lote"><br>
+    Informe a % de perda: <input type="number" min="00" max="99" id="input_perda"><br><br>
+    <button onclick="calcularPerda()">Calcular a perda</button><br><br>
+    <div id="div_resultado"></div>
+</body>
+</html>
+
+<script>
+    function calcularPerda(){
+        var lotes = Number(input_lotes.value);
+        var valor = Number(input_preco_lote.value);
+        var porcentagemPerdas = Number(input_perda.value);
+        var precoLotes = lotes * valor;
+        var precoPerda = precoLotes * (porcentagemPerdas / 100);
+        var economia = precoPerda - (precoPerda * (45 / 100));
+        var lucro = precoPerda - economia;
+
+        // Verificar se a porcentagem é positiva para poder mostrar os dados 
+        // Se não for não irá mostrar
+        if(porcentagemPerdas > 1){
+        div_resultado.innerHTML = `
+            <b>VALORES ALOCADOS</b><br><br>
+
+            Quantidade de lotes: <b>${lotes}</b><br>
+            V alor por lote: <b>${valor}</b><br>
+            Porcentagem de perda: <b>${porcentagemPerdas}</b><br><br>
+
+            <b>ANALISE DE PERDA</b><br><br>
+
+            Transportando <b>${lotes}</b> lotes pelo valor de <b>R$${valor}</b> cada, você gastou
+            <b>R$${precoLotes}</b>.<br>
+            
+            Com <b style="color: red">${porcentagemPerdas}%</b> de perdas, você teve um prejuízo
+            de <b style="color: red">R$${precoPerda}</b>.<br>
+            
+            Com a nossa ferramenta, você economizaria <b style="color: green">R$${economia}</b>,
+            fornecendo um lucro de <b style="color: green">R$${lucro}</b> à sua empresa.
+            <br>
+    
+        `;
+        }
+        // Caso a % seja menor que 100 e maior que 10 irá prosseguir com as 'Possibilidades'
+        if(porcentagemPerdas < 100){
+            if(porcentagemPerdas > 1){
+                var porcentagemPerdas_01 = porcentagemPerdas - 10;
+                var precoPerda_01 = precoLotes * ( porcentagemPerdas_01 / 100);
+                var economia_01 = precoPerda_01 - (precoPerda_01 * (45 / 100));
+                var lucro_01 = precoPerda_01 - economia_01;
+                div_resultado.innerHTML += `<br>
+                    <b>POSSIBILIDADES</b><br><br>
+
+                    Caso a perda tenha sido no valor de <b style="color: red">${porcentagemPerdas_01}%</b>, você teria um prejuízo de <b style="color: red">R$${precoPerda_01}</b>.<br>
+
+                    Ultilizando a nossa ferramenta, você economizaria <b style="color: green">R$${economia_01}</b> e teria o lucro de <b style="color: green">R$${lucro_01}</b>.
+                `;
+
+                // Segunda 'Possibilidade'
+                var porcentagemPerdas_02 = porcentagemPerdas + 10;
+                var precoPerda_02 = precoLotes * ( porcentagemPerdas_02 / 100);
+                var economia_02 = precoPerda_02 - (precoPerda_02 * (45 / 100));
+                var lucro_02 = precoPerda_02 - economia_02;
+                div_resultado.innerHTML += `<br><br>
+                    Caso a perda tenha sido no valor de <b style="color: red">${porcentagemPerdas_02}%</b>, você teria um prejuízo de <b style="color: red">R$${precoPerda_02}</b><br>
+
+                    Ultilizando a nossa ferramenta, você economizaria <b style="color: green">R$${economia_02}</b> e teria o lucro de <b style="color: green">R$${lucro_02}</b>.
+                `;
+                }
+            }
+        
+            // Caso o usuário coloque a % maior que 100
+            if(porcentagemPerdas >= 100){
+                div_resultado.innerHTML += `<br>
+                <h2><b style="color: red">Você está falindo!!</b></h2>
+                <br>
+                Pois sua porcentagem está acima de 100
+                `;
+            }
+            // Caso o usuário coloque a % em negativo
+            if(porcentagemPerdas <= -1){
+                div_resultado.innerHTML += `<br>
+                <h2><b style="color: red">Você não está falindo!!</b></h2>
+                <br>
+                Pois sua porcentagem está no negativo
+                `;
+            }
+        }
+    
+</script>
