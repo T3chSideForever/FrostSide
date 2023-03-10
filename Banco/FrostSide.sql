@@ -1,4 +1,3 @@
-use sprint1;
 CREATE DATABASE frostSide;
 USE frostSide;
 
@@ -68,20 +67,16 @@ INSERT INTO usuario (login, senha) VALUES
 
 select * from usuario;
 
-select * from fornecedor;
-
-insert into fornecedor (nome, cnpj) values
-('Johnson', '90547821436517');
-
-update fornecedor set nome = 'johnson johnson' where idFornecedor = 5;
-
-select * from usuario where login like '%_';
-
-drop database frostSide;
-
 CREATE TABLE destino (
 idDestino int primary key auto_increment,
 nomeDestino VARCHAR(100)
 );
-/*dtEntrega DATETIME*/
 
+INSERT INTO destino (idDestino, nomeDestino) VALUES
+(null, 'Eurofarma'),
+(null, 'Sanofi'),
+(null, 'Hospital Estadual Sumaré Dr. Leandro Franceschini'),
+(null, 'Hospital Geral Dr. Waldemar Alcantara');
+
+
+/*dtEntrega DATETIME*/
