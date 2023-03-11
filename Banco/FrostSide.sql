@@ -93,4 +93,19 @@ idLote int primary key auto_increment,
 nomeRemedio varchar(80)
 );
 
+CREATE TABLE carga (
+idCarga int primary key auto_increment,
+fkTransportadora int,
+fkPedido int,
+fkLote int
+);
+
+
+ALTER TABLE carga  ADD FOREIGN KEY (fkTransportadora) REFERENCES transportadora(idTransportadora),
+ADD FOREIGN KEY (fkPedido) REFERENCES pedido(idPedido),
+ADD FOREIGN KEY (fkLote) REFERENCES lote(idLote);
+
+desc carga;
 SHOW TABLES FROM frostside;
+select * from carga;
+
