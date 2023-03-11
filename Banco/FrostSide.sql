@@ -109,3 +109,11 @@ desc carga;
 SHOW TABLES FROM frostside;
 select * from carga;
 
+alter table pedido drop column tempMax;
+alter table pedido drop column tempMin;
+
+alter table lote add column tempMax DECIMAL (3, 1);
+alter table lote add column tempMin DECIMAL (3, 1);
+
+desc pedido;
+desc lote;
