@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    Quantidade de lotes: <input type="number" id="inputQtdLotes">
+    <br>
+    Valor médio do lote: <input type="number" id="inputValorMedioLote">
+    <br>
+    Porcentagem de perda <input type="number" id="inputPorcentagemPerda">
+    <br>
+    <button onclick="calcular()">Calcular</button>
+    <br>
+    <span id="exibirMensagem"></span>
+</body>
+</html>
+
+<script>
+    function calcular() {
+        var qtdLotes = inputQtdLotes.value
+        var valorMedioLote = inputValorMedioLote.value
+        var porcentagemPerda = inputPorcentagemPerda.value
+
+        var valorTotalLote = qtdLotes * valorMedioLote;
+        var valorPerda = (valorTotalLote * porcentagemPerda)/100;
+        var valorFinalPerda = valorTotalLote - valorPerda;
+        var valorGanho = valorPerda - (valorPerda * 45)/100;
+        var valorFinalGanho = valorPerda - valorGanho;
+        var valorLucroFinal = valorFinalPerda + valorFinalGanho;
+
+        exibirMensagem.innerHTML = `Você gastou o total de: <b>R$${valorTotalLote}</b>, e teve uma perda de <b style = "color: red">20%</b> desse valor: <b style = "color: red">R$${valorPerda}</b>, no final você ficou com: <b>R$${valorFinalPerda}</b>
+        <br>
+        O nosso sistema garante que desse <b style="color: red">20%</b> que se perdeu você economize <b style="color:green">45%</b>, então você vai perder apenas: <b style="color:green">R$${valorGanho}</b>, tendo o lucro de: <b style="color:green">R$${valorFinalGanho}</b>.
+        <br> Ficando no total com: <b style="color:green">R$${valorLucroFinal}</b>`
+
+    }
+</script>
