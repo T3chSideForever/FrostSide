@@ -7,11 +7,6 @@ CREATE TABLE usuario(
     senha VARCHAR(50)
 );
 
-INSERT INTO usuario (login, senha)
-	VALUES 
-		('empresa1', '123456');
-SELECT * FROM usuario;
-
 CREATE TABLE transportadora(
 	idTransportadora INT PRIMARY KEY auto_increment,
     nome VARCHAR(50),
@@ -19,27 +14,10 @@ CREATE TABLE transportadora(
     IE CHAR(9)
 );
 
-INSERT INTO transportadora(nome, cnpj)
-	VALUES	
-		('Log10','18459628000115'),
-		('FarmaTransporte','13094578000872'),
-		('SpeedTransfer','46070868003699');
-        
-SELECT *  FROM transportadora;
-
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY auto_increment,
     sitSensor VARCHAR(50) constraint ckSensor check (sitSensor IN('Quebrado', 'Funcionando'))
 );
-
-INSERT INTO sensor (sitSensor)
-	VALUES
-		('Quebrado'),
-		('Funcionando'),
-		('Funcionando'),
-		('Funcionando');
-SELECT * FROM sensor;
-
 
 CREATE TABLE registro(
 	idRegistro INT primary key auto_increment,
@@ -49,71 +27,72 @@ CREATE TABLE registro(
     FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
 );
 
-INSERT INTO registro(idSensor, registro)
-	VALUES 
-		(2,-05.2),
-		(3,01.2),
-		(4,30.5);
-
-SELECT * FROM registro;
-DESC sensor;
-DESC transportadora;
-DESC usuario;
-
-SELECT * FROM usuario;
-
-INSERT INTO usuario (login, senha) VALUES
-('empresa5', '489012');
-
-select * from usuario;
-
 CREATE TABLE destino (
 idDestino int primary key auto_increment,
 nomeDestino VARCHAR(100)
 );
 
-INSERT INTO destino (idDestino, nomeDestino) VALUES
-(null, 'Eurofarma'),
-(null, 'Sanofi'),
-(null, 'Hospital Estadual Sumaré Dr. Leandro Franceschini'),
-(null, 'Hospital Geral Dr. Waldemar Alcantara');
-
 CREATE TABLE pedido (
 idPedido INT PRIMARY KEY auto_increment,
-qtdLotes int,
-tempMax DECIMAL(3,1),
-tempMin DECIMAL(3,1)
+qtdLotes int
 );
-
-desc pedido;
-/*dtEntrega DATETIME*/
 
 CREATE TABLE lote (
 idLote int primary key auto_increment,
-nomeRemedio varchar(80)
+nomeRemedio varchar(80),
+tempMax DECIMAL(3,1),
+tempMin DECIMAL(3,1)
 );
 
 CREATE TABLE carga (
 idCarga int primary key auto_increment,
 fkTransportadora int,
 fkPedido int,
-fkLote int
+fkLote int,
+FOREIGN KEY (fkPedido) REFERENCES pedido(idPedido),
+FOREIGN KEY (fkLote) REFERENCES lote(idLote)
 );
+SHOW TABLES;
+
+-- INSERTS 
+INSERT INTO usuario (login, senha)
+	VALUES 
+		('empresa1', '123456');
+        
+INSERT INTO transportadora(nome, cnpj)
+	VALUES	
+		('Log10','18459628000115'),
+		('FarmaTransporte','13094578000872'),
+		('SpeedTransfer','46070868003699');
+
+INSERT INTO sensor (sitSensor)
+	VALUES
+		('Quebrado'),
+		('Funcionando'),
+		('Funcionando'),
+		('Funcionando');
+
+INSERT INTO registro(idSensor, registro)
+	VALUES 
+		(2,-05.2),
+		(3,01.2),
+		(4,30.5);
+        
+INSERT INTO destino (idDestino, nomeDestino) VALUES
+(null, 'Eurofarma'),
+(null, 'Sanofi'),
+(null, 'Hospital Estadual Sumaré Dr. Leandro Franceschini'),
+(null, 'Hospital Geral Dr. Waldemar Alcantara');        
+
+-- SELECTS
+SELECT * FROM usuario;
+SELECT * FROM transportadora;
+SELECT * FROM sensor;
+SELECT * FROM registro;
+SELECT * FROM destino;
+SELECT * FROM pedido;
+SELECT * FROM lote;
+SELECT * FROM carga;
 
 
-ALTER TABLE carga  ADD FOREIGN KEY (fkTransportadora) REFERENCES transportadora(idTransportadora),
-ADD FOREIGN KEY (fkPedido) REFERENCES pedido(idPedido),
-ADD FOREIGN KEY (fkLote) REFERENCES lote(idLote);
 
-desc carga;
-SHOW TABLES FROM frostside;
-select * from carga;
-
-alter table pedido drop column tempMax;
-alter table pedido drop column tempMin;
-
-alter table lote add column tempMax DECIMAL (3, 1);
-alter table lote add column tempMin DECIMAL (3, 1);
-
-desc pedido;
-desc lote;
