@@ -19,12 +19,21 @@ CREATE TABLE sensor(
     sitSensor VARCHAR(50) constraint ckSensor check (sitSensor IN('Quebrado', 'Funcionando'))
 );
 
+CREATE TABLE lote (
+idLote int primary key auto_increment,
+nomeRemedio varchar(80),
+tempMax DECIMAL(3,1),
+tempMin DECIMAL(3,1)
+);
+
 CREATE TABLE registro(
 	idRegistro INT primary key auto_increment,
-    idSensor INT,
+    fkSensor INT,
+    fkLote INT, 
     registro DECIMAL(3,1), -- colocar valor como: 24.2, 21.0 e por ai vai, sempre com 3 digitos, 2 depois do ponto e um atrás
     dtRegistro DATETIME DEFAULT current_timestamp,    
-    FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
+	FOREIGN KEY (fkLote) REFERENCES lote(idLote)
 );
 
 CREATE TABLE destino (
@@ -37,22 +46,20 @@ idPedido INT PRIMARY KEY auto_increment,
 qtdLotes int
 );
 
-CREATE TABLE lote (
-idLote int primary key auto_increment,
-nomeRemedio varchar(80),
-tempMax DECIMAL(3,1),
-tempMin DECIMAL(3,1)
-);
+
 
 CREATE TABLE carga (
 idCarga int primary key auto_increment,
 fkTransportadora int,
 fkPedido int,
 fkLote int,
+fkDestino INT,
 FOREIGN KEY (fkPedido) REFERENCES pedido(idPedido),
-FOREIGN KEY (fkLote) REFERENCES lote(idLote)
+FOREIGN KEY (fkLote) REFERENCES lote(idLote),
+FOREIGN KEY (fkTransportadora) REFERENCES transportadora(idTransportadora),
+FOREIGN KEY (fkDestino) REFERENCES destino(idDestino)
 );
-SHOW TABLES;
+
 
 -- INSERTS 
 INSERT INTO usuario (login, senha)
@@ -72,7 +79,7 @@ INSERT INTO sensor (sitSensor)
 		('Funcionando'),
 		('Funcionando');
 
-INSERT INTO registro(idSensor, registro)
+INSERT INTO registro(fkSensor, registro)
 	VALUES 
 		(2,-05.2),
 		(3,01.2),
@@ -83,6 +90,21 @@ INSERT INTO destino (idDestino, nomeDestino) VALUES
 (null, 'Sanofi'),
 (null, 'Hospital Estadual Sumaré Dr. Leandro Franceschini'),
 (null, 'Hospital Geral Dr. Waldemar Alcantara');        
+
+INSERT INTO pedido(qtdLotes) VALUES
+(3),	
+(4),
+(5);
+
+INSERT INTO lote(nomeRemedio, tempMax, tempMin) VALUES
+('Insulina Regular', 8, 2),
+('Rocurônio', 8, 2),
+('Cisatracúrio', 8, 2);
+
+INSERT INTO carga (fkTransportadora, fkPedido, fkLote, fkDestino) VALUES
+(1, 2, 1, 3),
+(1, 2, 2, 2),
+(1, 2, 3, 4);
 
 -- SELECTS
 SELECT * FROM usuario;
