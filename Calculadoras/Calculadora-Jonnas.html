@@ -25,33 +25,33 @@
         var porcentagemPerdas = Number(input_perda.value);
         var precoLotes = lotes * valor;
         var precoPerda = precoLotes * (porcentagemPerdas / 100);
-        var economia = precoPerda - (precoPerda * (45 / 100));
-        var lucro = precoPerda - economia;
+        var perdaDiminuida = precoPerda - (precoPerda * (45 / 100));
+        var economia = precoPerda - perdaDiminuida;
         div_resultado.innerHTML = `
             Transportando <b>${lotes}</b> lotes pelo valor de <b>R$${valor}</b> cada, você gastou
             <b>R$${precoLotes}</b> e, com <b style="color: red">${porcentagemPerdas}%</b> de perdas, você teve um prejuízo
-            de <b style="color: red">R$${precoPerda}</b>, com a nossa ferramenta, você economizaria <b style="color: green">R$${economia}</b>,
-            fornecendo um lucro de <b style="color: green">R$${lucro}</b> à sua empresa
+            de <b style="color: red">R$${precoPerda}</b>, com a nossa ferramenta, você perderia somente <b style="color: green">R$${perdaDiminuida}</b>
+            e economizaria <b style="color: green">R$${economia}</b>
     
         `;
-        var porcentagemPerdas_01 = porcentagemPerdas - 10;
-        var precoPerda_01 = precoLotes * ( porcentagemPerdas_01 / 100);
-        var economia_01 = precoPerda_01 - (precoPerda_01 * (45 / 100));
-        var lucro_01 = precoPerda_01 - economia_01;
+        var porcentagemPerdas_01 = porcentagemPerdas + 10;
+        var precoPerda_01 = precoLotes * (porcentagemPerdas_01 / 100);
+        var perdaDiminuida_01 = precoPerda_01 - (precoPerda_01 * (45 / 100));
+        var economia_01 = precoPerda_01 - perdaDiminuida_01;
         div_resultado.innerHTML += `<br><br>
-            Caso a perda tenha sido no valor de <b style="color: red">${porcentagemPerdas_01}%</b>, você teria um prejuízo
-            de <b style="color: red">R$${precoPerda_01}</b>, com a nossa ferramenta, você economizaria <b style="color: green">R$${economia_01}</b> e
-            teria o lucro de <b style="color: green">R$${lucro_01}</b>
+            Caso a perda fosse de <b style="color: red">${porcentagemPerdas_01}%</b>, você teria um prejuízo
+            de <b style="color: red">R$${precoPerda_01}</b>, com a nossa ferramenta, você perderia somente <b style="color: green">R$${perdaDiminuida_01}</b> e
+            economizaria de <b style="color: green">R$${economia_01}</b>
         `;
         
-        var porcentagemPerdas_02 = porcentagemPerdas + 10;
+        var porcentagemPerdas_02 = porcentagemPerdas + 20;
         var precoPerda_02 = precoLotes * ( porcentagemPerdas_02 / 100);
-        var economia_02 = precoPerda_02 - (precoPerda_02 * (45 / 100));
-        var lucro_02 = precoPerda_02 - economia_02;
+        var perdaDiminuida_02 = precoPerda_02 - (precoPerda_02 * (45 / 100));
+        var economia_02 = precoPerda_02 - perdaDiminuida_02;
         div_resultado.innerHTML += `<br><br>
-                    Caso a perda tenha sido no valor de <b style="color: red">${porcentagemPerdas_02}%</b>, você teria um prejuízo
-                    de <b style="color: red">R$${precoPerda_02}</b>, com a nossa ferramenta, você economizaria <b style="color: green">R$${economia_02}</b> e
-                    teria o lucro de <b style="color: green">R$${lucro_02}</b>
+                    Caso a perda fosse de <b style="color: red">${porcentagemPerdas_02}%</b>, você teria um prejuízo
+                    de <b style="color: red">R$${precoPerda_02}</b>, com a nossa ferramenta, você perderia somente <b style="color: green">R$${perdaDiminuida_02}</b> e
+                    economizaria <b style="color: green">R$${economia_02}</b>
             `;
     }
 </script>
